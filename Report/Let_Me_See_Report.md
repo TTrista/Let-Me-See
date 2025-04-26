@@ -10,8 +10,11 @@ This project presents a mobile-based sitting posture detection system that class
 
 The motivation behind the project stems from the observation that many students and office workers unknowingly adopt poor sitting postures during prolonged screen time. These positions, while seemingly comfortable, may lead to reduced focus or long-term musculoskeletal strain. Inspired by open-source tools like MoveNet and TinyML applications, the project aims to bring lightweight AI into everyday health-related use cases without requiring additional hardware.
 
-![System Workflow Overview](../Assets/images/Figure1.jpg)
-*Figure 1 — Application Workflow Diagram*
+<p align="center">
+  <img src="../Assets/images/Figure1.jpg" alt="Stop Status" width="600"height="350"/><br/>
+  <b>Figure 1:</b>  Application Workflow Diagram
+</p>
+
 
 ## Research Question
 
@@ -23,8 +26,11 @@ The system consists of five main components: **data acquisition**, **pose estima
 
 Each image is converted into a 51-dimensional feature vector based on the coordinates and confidence values of 17 human skeletal keypoints. These features are passed into a fully connected neural network classifier, which assigns a posture label. Once trained, the model is exported as a WebAssembly app and deployed via QR code access in a mobile browser. All inference is executed locally, ensuring privacy and low latency. Real-time results are visually presented to help users maintain healthier posture habits.
 
-![System Workflow Overview](../Assets/images/Figure2.jpg)
-*Figure 2. Workflow of the sitting posture detection system.*
+<p align="center">
+  <img src="../Assets/images/Figure2.jpg" alt="Stop Status" width="550"height="300"/><br/>
+  <b>Figure 2:</b>  Workflow of the sitting posture detection system.
+</p>
+
 
 ## Data
 
@@ -38,8 +44,11 @@ Initially, a binary label scheme (Normal vs. Bad) was used, but proved too coars
 
 All images were manually reviewed for label accuracy. Pose estimation was performed through Edge Impulse, and any images with missing or poor-quality keypoints were removed. One example of a correctly labeled sample is shown below:
 
-![Pose Estimation on Sample Data](../Assets/images/Figure3.jpg)
-*Figure 3. Example of a labeled input image and its pose estimation overlay.*
+<p align="center">
+  <img src="../Assets/images/Figure3.jpg" alt="Stop Status" width="550"height="300"/><br/>
+  <b>Figure 3:</b>  Example of a labeled input image and its pose estimation overlay.
+</p>
+
 
 ## Model
 
@@ -47,8 +56,12 @@ The model architecture is a fully connected neural network (FCNN). It takes a 51
 
 This structure was chosen for its simplicity and performance balance, supporting both accuracy and real-time execution. It was exported in WebAssembly format for in-browser deployment.
 
-![Neural Network Architecture](../Assets/images/Figure4.png)
-*Figure 4. Architecture of the fully connected neural network.*
+<p align="center">
+  <img src="../Assets/images/Figure4.png" alt="Stop Status" width="200" height=“200”/><br/>
+  <b>Figure 4:</b>  Architecture of the fully connected neural network.
+</p>
+
+
 
 ## Experiments
 
@@ -56,8 +69,11 @@ Several experiments were conducted to improve the model through network and para
 
 The label set was also changed from binary to three-class to enhance expressiveness. To address class imbalance, more Forward samples were added. These changes stabilized training and improved test accuracy to 81.5%.
 
-![Training Configuration and Results](../Assets/images/Figure5.jpg)
-*Figure 5. Final training setup and validation performance metrics.*
+<p align="center">
+  <img src="../Assets/images/Figure5.jpg" alt="Stop Status" width="600"height="350"/><br/>
+  <b>Figure 5:</b>  Final training setup and validation performance metrics.
+</p>
+
 
 ## Results and Observations
 
@@ -65,8 +81,12 @@ The final model achieved 90.0% accuracy on the training set and 81.5% on the tes
 
 Still, classification of **Forward** postures remained challenging. Its F1 score was lower than those of **Backward** and **Normal**, and misclassifications often occurred near the boundary between Forward and Normal. Feature Explorer visualizations showed clustering overlap in this region.
 
-![Test Configuration and Results](../Assets/images/Figure6.png)
-*Figure 6. Final testing set and validation performance metrics.*
+<p align="center">
+  <img src="../Assets/images/Figure6.png" alt="Stop Status" width="600"height="350"/><br/>
+  <b>Figure 6:</b>   Final testing set and validation performance metrics.
+</p>
+
+
 
 
 These errors were likely caused by limited training samples, especially for borderline postures, and pose estimation errors when clothing matched the background. 
